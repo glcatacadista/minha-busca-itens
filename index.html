@@ -3,37 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Busca de Produtos</title>
+  <title>Pesquisa de Itens</title>
 
-  <!-- Bootstrap 5 CSS -->
-  <link
-    rel="stylesheet"
-    href="assets/bootstrap.min.css"
-  />
+  <!-- Bootstrap 5 CSS (pode usar arquivo local em assets/ ou CDN) -->
+  <link rel="stylesheet" href="assets/bootstrap.min.css" />
 
-  <!-- DataTables CSS (estilo Bootstrap 5) -->
-  <link
-    rel="stylesheet"
-    href="assets/dataTables.bootstrap5.min.css"
-  />
-
-  <style>
-    /* Apenas um ajuste simples para dar um pouco de margem em volta */
-    body {
-      padding: 20px;
-    }
-  </style>
+  <!-- DataTables + Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="assets/dataTables.bootstrap5.min.css" />
 </head>
 <body>
-  <div class="container">
-    <h1 class="mb-4">Pesquisa de Itens</h1>
-    <p>
-      Digite qualquer palavra (ou várias separadas por espaço) no campo de busca para filtrar os resultados. 
-      Exemplo: <strong>“computador 32 gb ram”</strong> encontrará “Computador Intel 32 GB RAM”.
-    </p>
-
-    <!-- Campo de busca: o DataTables vai criar essa caixa automaticamente -->
-    <table id="tabela-itens" class="table table-striped" style="width:100%">
+  <div class="container mt-4">
+    <h1>Pesquisa de Itens</h1>
+    <table id="tabela-itens" class="table table-striped mt-3" style="width:100%">
       <thead>
         <tr>
           <th>Data do processo</th>
@@ -47,27 +28,21 @@
         </tr>
       </thead>
       <tbody>
-        <!-- O JavaScript vai popular automaticamente -->
+        <!-- Será populado via JavaScript -->
       </tbody>
     </table>
   </div>
 
   <!-- jQuery (necessário para DataTables) -->
   <script src="assets/jquery.min.js"></script>
-
-  <!-- DataTables JS (versão que funciona com Bootstrap 5) -->
+  <!-- DataTables JS (versão com integração para Bootstrap 5) -->
   <script src="assets/jquery.dataTables.min.js"></script>
-
-  <!-- Se você baixou a versão específica para Bootstrap 5, inclua também -->
   <script src="assets/dataTables.bootstrap5.min.js"></script>
 
   <script>
     $(document).ready(function () {
-      // Carregar o JSON com todos os registros
-      // (caso tenha usado PapaParse para CSV, ajustaria aqui para ler CSV)
+      // Carrega o JSON com os dados
       $.getJSON("dados.json", function (data) {
-        // `data` é um array de objetos que vieram do JSON
-        // Vamos transformar cada objeto em uma linha <tr> de tabela
         var linhas = "";
         data.forEach(function (item) {
           linhas += "<tr>";
@@ -85,16 +60,10 @@
 
         // Inicializa o DataTable
         $("#tabela-itens").DataTable({
-          // Configurações opcionais:
-          // * Ativa busca com “contains” de múltiplos termos (é o padrão)
-          // * Permite ordenar, paginação, etc.
           paging: true,
           ordering: true,
           info: true,
-          // Lê o texto da busca e quebra em “AND” de palavras automaticamente
-          search: {
-            smart: true,   // depura acentuação, case-insensitive, quebra em palavras
-          },
+          search: { smart: true },
           language: {
             url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/pt-BR.json"
           }
