@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pesquisa de Itens</title>
 
-  <!-- Bootstrap 5 CSS (pode usar arquivo local em assets/ ou CDN) -->
+  <!-- Bootstrap 5 CSS (arquivo local em assets/) -->
   <link rel="stylesheet" href="assets/bootstrap.min.css" />
 
-  <!-- DataTables + Bootstrap 5 CSS -->
+  <!-- DataTables + Bootstrap 5 CSS (arquivo local em assets/) -->
   <link rel="stylesheet" href="assets/dataTables.bootstrap5.min.css" />
 </head>
 <body>
@@ -28,20 +28,20 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Será populado via JavaScript -->
+        <!-- O JavaScript vai popular aqui -->
       </tbody>
     </table>
   </div>
 
-  <!-- jQuery (necessário para DataTables) -->
+  <!-- jQuery (necessário para DataTables) – carregado de assets/ -->
   <script src="assets/jquery.min.js"></script>
-  <!-- DataTables JS (versão com integração para Bootstrap 5) -->
+  <!-- DataTables JS (versão com Bootstrap 5) – carregado de assets/ -->
   <script src="assets/jquery.dataTables.min.js"></script>
   <script src="assets/dataTables.bootstrap5.min.js"></script>
 
   <script>
     $(document).ready(function () {
-      // Carrega o JSON com os dados
+      // Carrega dados do JSON
       $.getJSON("dados.json", function (data) {
         var linhas = "";
         data.forEach(function (item) {
